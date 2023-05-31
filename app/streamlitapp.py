@@ -19,7 +19,8 @@ with st.sidebar:
     st.info('This application is originally developed from the LipNet deep learning model.')
 
 st.title('Lip Net Full Stack App')
-st.text(os.getcwd())
+new_dir = '/app'
+os.chdir(new_dir)
 
 options = os.listdir(os.path.join('..', 'data', 's1'))
 selected_video = st.selectbox('Choose Video', options)
