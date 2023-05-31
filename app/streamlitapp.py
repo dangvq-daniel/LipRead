@@ -41,8 +41,6 @@ if options:
 
     with col2:
         st.info('This is what the machine learning model sees when making a prediction')
-        file_name = file_path.split('/')[-1].split('.')[0]
-        st.text(file_name)
         video, annotations = load_data(tf.convert_to_tensor(file_path))
         imageio.mimsave('animation.gif', video, duration = 0.1)
         st.image('animation.gif', width = 400)
