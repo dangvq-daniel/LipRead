@@ -22,7 +22,9 @@ st.title('Lip Net Full Stack App')
 st.text(os.getcwd())
 new_dir = '/app'
 os.chdir(new_dir)
+st.text(os.listdir)
 st.text(os.path.join('..', 'data', 's1'))
+
 options = os.listdir(os.path.join('..', 'data', 's1'))
 selected_video = st.selectbox('Choose Video', options)
 
