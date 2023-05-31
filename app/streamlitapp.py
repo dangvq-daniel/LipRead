@@ -5,6 +5,7 @@ import streamlit as st
 import os
 import imageio
 import ffmpeg
+import subprocess
 
 import tensorflow as tf
 from utils import load_data, num_to_char
@@ -41,9 +42,9 @@ if options:
     with col1:
         st.info('The video blow displays the converted video in mp4 format')
         file_path = os.path.join('..','data','s1', selected_video)
-        # os.system(f'ffmpeg -i {file_path} -vcodec libx264 test_video.mp4 -y')
-        output_file = 'test_video.mp4'
-        convert_mpg_to_mp4(file_path, output_file)
+        output_path = os.path.join('..', 'data', 's1', 'test_video.mp4')
+        os.system(f'ffmpeg -i {file_path} -vcodec libx264 {output_path} -y')
+
         # Rendering inside of the app
         video = open('test_video.mp4', 'rb') 
         video_bytes = video.read() 
