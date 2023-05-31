@@ -42,7 +42,7 @@ if options:
     with col1:
         st.info('The video blow displays the converted video in mp4 format')
         file_path = os.path.join('..','data','s1', selected_video)
-        output_path = os.path.join('..', 'data', 's1', 'test_video.mp4')
+        output_path = 'test_video.mp4'
         os.system(f'ffmpeg -i {file_path} -vcodec libx264 {output_path} -y')
 
         # Rendering inside of the app
