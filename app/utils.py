@@ -40,8 +40,7 @@ def load_data(path: str):
     path = bytes.decode(path.numpy())
     file_name = path.split('/')[-1].split('.')[0]
     file_name = os.path.splitext(os.path.basename(path))[0]
-    with st_stdout:
-        print(file_name)
+    print(file_name)
     # File name splitting for windows
     # file_name = path.split('\\')[-1].split('.')[0]
     video_path = os.path.join('..','data','s1',f'{file_name}.mpg')
