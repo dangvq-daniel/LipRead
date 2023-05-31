@@ -11,6 +11,14 @@ num_to_char = tf.keras.layers.StringLookup(
     vocabulary=char_to_num.get_vocabulary(), oov_token="", invert=True
 )
 
+def convert_mpg_to_mp4(input_file, output_file):
+    (
+        ffmpeg
+        .input(input_file)
+        .output(output_file, vcodec='libx264')
+        .run()
+    )
+
 def load_video(path:str) -> List[float]: 
     #print(path)
     cap = cv2.VideoCapture(path)
