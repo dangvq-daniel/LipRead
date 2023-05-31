@@ -69,3 +69,7 @@ if options:
         st.info('Decode the raw tokens into words')
         converted_prediction = tf.strings.reduce_join(num_to_char(decoder)).numpy().decode('utf-8')
         st.text(converted_prediction)
+with st.beta_expander("View Model Structure"):
+    st.text("Model Summary:")
+    st.code(model.summary(), language='python')
+    
