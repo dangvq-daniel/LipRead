@@ -19,7 +19,7 @@ with st.sidebar:
     st.info('This application is originally developed from the LipNet deep learning model.')
 
 st.title('Lip Net Full Stack App')
-st.text(os.cwd())
+st.text(os.getcwd())
 new_dir = '/app'
 os.chdir(new_dir)
 
