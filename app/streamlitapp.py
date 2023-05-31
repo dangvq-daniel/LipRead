@@ -7,7 +7,7 @@ import imageio
 import ffmpeg
 
 import tensorflow as tf
-from utils import load_data, num_to_char, convert_mpg_to_mp4
+from utils import load_data, num_to_char
 from modelutil import load_model
 
 # Set the layout to the streamlit app as wide 
@@ -28,13 +28,22 @@ selected_video = st.selectbox('Choose Video', options)
 # Generate two columns
 col1, col2 = st.columns(2)
 
+def convert_mpg_to_mp4(input_file, output_file):
+    (
+        ffmpeg
+        .input(input_file)
+        .output(output_file, vcodec='libx264')
+        .run()
+    )
+
 if options:
     
     with col1:
         st.info('The video blow displays the converted video in mp4 format')
         file_path = os.path.join('..','data','s1', selected_video)
-        os.system(f'ffmpeg -i {file_path} -vcodec libx264 test_video.mp4 -y')
-
+        # os.system(f'ffmpeg -i {file_path} -vcodec libx264 test_video.mp4 -y')
+        output_file = 'test_video.mp4'
+        convert_mpg_to_mp4(file_path, output_file)
         # Rendering inside of the app
         video = open('test_video.mp4', 'rb') 
         video_bytes = video.read() 
