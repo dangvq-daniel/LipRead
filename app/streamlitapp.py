@@ -22,7 +22,7 @@ with st.sidebar:
 
 st.title('Lip Net Full Stack App')
 st.text(os.listdir())
-os.chdir('app/lip_read/app')
+os.chdir('./app')
 
 options = os.listdir(os.path.join('..', 'data', 's1'))
 selected_video = st.selectbox('Choose Video', options)
