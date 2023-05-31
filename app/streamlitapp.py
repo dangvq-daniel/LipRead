@@ -71,5 +71,6 @@ if options:
         st.text(converted_prediction)
 with st.beta_expander("View Model Structure"):
     st.text("Model Summary:")
+    model = load_model()
     st.code(model.summary(), language='python')
     
