@@ -2,7 +2,7 @@ import tensorflow as tf
 from typing import List
 import cv2
 import os
-import streamlit as st
+import ffmpeg
 
 vocab = [x for x in "abcdefghijklmnopqrstuvwxyz'?!123456789 "]
 char_to_num = tf.keras.layers.StringLookup(vocabulary=vocab, oov_token="")
