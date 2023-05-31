@@ -21,7 +21,7 @@ with st.sidebar:
     st.info('This application is originally developed from the LipNet deep learning model.')
 
 st.title('Lip Net Full Stack App')
-st.text(os.getcwd())
+st.text(os.listdir())
 os.chdir('app/lip_read/app')
 
 options = os.listdir(os.path.join('..', 'data', 's1'))
