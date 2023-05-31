@@ -6,7 +6,7 @@ charset-normalizer==3.1.0
 flatbuffers==23.5.26
 gast==0.4.0
 google-auth==2.19.0
-google-auth-oauthlib==0.4.9
+google-auth-oauthlib==0.4.6
 google-pasta==0.2.0
 grpcio==1.54.2
 h5py==3.8.0
