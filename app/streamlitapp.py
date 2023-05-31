@@ -4,9 +4,10 @@ import numpy as np
 import streamlit as st
 import os
 import imageio
+import ffmpeg
 
 import tensorflow as tf
-from utils import load_data, num_to_char
+from utils import load_data, num_to_char, convert_mpg_to_mp4
 from modelutil import load_model
 
 # Set the layout to the streamlit app as wide 
