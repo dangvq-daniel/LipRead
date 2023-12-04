@@ -13,11 +13,9 @@ from modelutil import load_model
 
 # Set the layout to the streamlit app as wide 
 st.set_page_config(layout='wide')
-try:
-    os.chdir('./app')
-except:
-    pass
+
 current_directory = os.getcwd()
+
 st.info("Current working directory:" + current_directory)
 
 # Setup the sidebar
