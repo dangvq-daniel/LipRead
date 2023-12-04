@@ -17,7 +17,8 @@ try:
     os.chdir('./app')
 except:
     pass
-
+current_directory = os.getcwd()
+print("Current working directory:", current_directory)
 
 # Setup the sidebar
 with st.sidebar: 
