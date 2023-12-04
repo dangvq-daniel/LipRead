@@ -18,7 +18,7 @@ try:
 except:
     pass
 current_directory = os.getcwd()
-st.info("Current working directory:", current_directory)
+st.info("Current working directory:" + current_directory)
 
 # Setup the sidebar
 with st.sidebar: 
