@@ -23,7 +23,7 @@ with st.sidebar:
 st.title('Lip Net Full Stack App')
 st.write('Current working directory:', os.getcwd())
 
-options = os.listdir(os.path.join('..', 'data', 's1'))
+options = os.listdir(os.path.join('.', 'data', 's1'))
 selected_video = st.selectbox('Choose Video', options)
 
 # Generate two columns
