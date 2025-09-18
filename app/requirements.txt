@@ -7,7 +7,6 @@ uvicorn==0.23.2
 
 # ML / Deep Learning
 tensorflow==2.19.0
-keras==2.19.0
 numpy==1.23.5
 scipy==1.10.1
 
