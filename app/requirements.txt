@@ -1,4 +1,0 @@
-Flask
-tensorflow
-imageio
-ffmpeg-python
