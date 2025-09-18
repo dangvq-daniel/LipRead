@@ -6,7 +6,7 @@ fastapi==0.103.2
 uvicorn==0.23.2
 
 # ML / Deep Learning
-tensorflow==2.19.0
+tensorflow==2.20.0
 numpy==1.23.5
 scipy==1.10.1
 
@@ -24,3 +24,4 @@ gast==0.4.0
 opt-einsum==3.3.0
 typing_extensions==4.6.2
 packaging==23.1
+
