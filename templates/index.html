@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LipNet Flask App</title>
+</head>
+<body>
+    <div style="width: 80%; margin: auto;">
+        <img src="https://www.onepointltd.com/wp-content/uploads/2020/03/inno2.png" width="200">
+        <h1>LipReader</h1>
+        <p>This application is originally developed from the LipNet deep learning model.</p>
+        <form method="POST">
+            <label for="video">Choose Video:</label>
+            <select name="video" id="video">
+                {% for option in options %}
+                    <option value="{{ option }}" {% if option == selected_video %}selected{% endif %}>{{ option }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+
+        {% if selected_video %}
+        <div style="display: flex; gap: 50px; margin-top: 20px;">
+            <div>
+                <h3>Converted Video (MP4)</h3>
+                <video width="400" controls>
+                    <source src="/static/test_video.mp4" type="video/mp4">
+                    Your browser does not support HTML video.
+                </video>
+            </div>
+            <div>
+                <h3>Model Visualization (GIF)</h3>
+                <img src="/static/animation.gif" width="400">
+                <h4>Raw Tokens</h4>
+                <p>{{ decoded_text }}</p>
+                <h4>Decoded Text</h4>
+                <p>{{ converted_prediction }}</p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
