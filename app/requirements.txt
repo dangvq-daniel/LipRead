@@ -1,34 +1,4 @@
-# Core Python tooling
-pip==23.0.1
-
-setuptools==67.8.0
-setuptools-distutils
-
-
-# API framework
-fastapi==0.103.2
-uvicorn==0.23.2
-
-# ML / Deep Learning
-tensorflow==2.20.0
-numpy==1.23.5
-scipy==1.10.1
-
-# Video / Image Processing
-ffmpeg-python==0.2.0
-imageio==2.26.0
-Pillow==9.4.0
-opencv-python-headless==4.7.0.72
-
-# Utilities
-requests==2.31.0
-protobuf==3.20.3
-h5py==3.8.0
-gast==0.4.0
-opt-einsum==3.3.0
-typing_extensions==4.6.2
-packaging==23.1
-
-
-
-
+Flask
+tensorflow
+imageio
+ffmpeg-python
