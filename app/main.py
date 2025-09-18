@@ -1,67 +1,81 @@
-# Import all of the dependencies
-
-import numpy as np
-import streamlit as st
 import os
+import subprocess
 import imageio
 import ffmpeg
-import subprocess
-
+import numpy as np
 import tensorflow as tf
+from fastapi import FastAPI, UploadFile, Form
+from fastapi.responses import FileResponse, JSONResponse
 from utils import load_data, num_to_char
 from modelutil import load_model
 
-# Set the layout to the streamlit app as wide 
-st.set_page_config(layout='wide')
+app = FastAPI(title="LipReader API")
 
-# Setup the sidebar
-with st.sidebar: 
-    st.image('https://www.onepointltd.com/wp-content/uploads/2020/03/inno2.png')
-    st.title('LipReader')
-    st.info('This application is originally developed from the LipNet deep learning model.')
+# Load model once on startup
+model = load_model()
 
-st.title('Lip Net Full Stack App')
-st.write('Current working directory:', os.getcwd())
+DATA_DIR = os.path.join(".", "data", "s1")
+OUTPUT_VIDEO = "./app/test_video.mp4"
+ANIMATION_GIF = "./app/animation.gif"
 
-options = os.listdir(os.path.join('.', 'data', 's1'))
-selected_video = st.selectbox('Choose Video', options)
-
-# Generate two columns
-col1, col2 = st.columns(2)
 
 def convert_mpg_to_mp4(input_file, output_file):
     (
         ffmpeg
         .input(input_file)
-        .output(output_file, vcodec='libx264')
-        .run()
+        .output(output_file, vcodec="libx264")
+        .run(overwrite_output=True)
     )
 
-if options:
-    
-    with col1:
-        st.info('The video blow displays the converted video in mp4 format')
-        file_path = os.path.join('.','data','s1', selected_video)
-        output_path = './app/test_video.mp4'
-        os.system(f'ffmpeg -i {file_path} -vcodec libx264 {output_path} -y')
 
-        # Rendering inside of the app
-        video = open('./app/test_video.mp4', 'rb') 
-        video_bytes = video.read() 
-        st.video(video_bytes)
+@app.get("/videos")
+def list_videos():
+    """List available video files"""
+    options = os.listdir(DATA_DIR)
+    return {"videos": options}
 
-    with col2:
-        st.info('This is what the machine learning model sees when making a prediction')
-        video, annotations = load_data(tf.convert_to_tensor(file_path))
-        imageio.mimsave('animation.gif', video, duration = 0.1)
-        st.image('animation.gif', width = 400)
 
-        st.info('This is the output of the machine learning model as tokens')
-        model = load_model()
-        yhat = model.predict(tf.expand_dims(video, axis=0))
-        decoder = tf.keras.backend.ctc_decode(yhat, [75], greedy=True)[0][0].numpy()
-        st.text(decoder)
+@app.get("/video/{filename}")
+def get_video(filename: str):
+    """Convert and return video in mp4 format"""
+    file_path = os.path.join(DATA_DIR, filename)
+    if not os.path.exists(file_path):
+        return JSONResponse({"error": "File not found"}, status_code=404)
 
-        st.info('Decode the raw tokens into words')
-        converted_prediction = tf.strings.reduce_join(num_to_char(decoder)).numpy().decode('utf-8')
-        st.text(converted_prediction)
+    convert_mpg_to_mp4(file_path, OUTPUT_VIDEO)
+    return FileResponse(OUTPUT_VIDEO, media_type="video/mp4")
+
+
+@app.get("/predict/{filename}")
+def predict(filename: str):
+    """Run model prediction on video"""
+    file_path = os.path.join(DATA_DIR, filename)
+    if not os.path.exists(file_path):
+        return JSONResponse({"error": "File not found"}, status_code=404)
+
+    # Load data as frames
+    video, annotations = load_data(tf.convert_to_tensor(file_path))
+    imageio.mimsave(ANIMATION_GIF, video, duration=0.1)
+
+    # Model prediction
+    yhat = model.predict(tf.expand_dims(video, axis=0))
+    decoder = tf.keras.backend.ctc_decode(yhat, [75], greedy=True)[0][0].numpy()
+
+    # Convert to text
+    converted_prediction = (
+        tf.strings.reduce_join(num_to_char(decoder)).numpy().decode("utf-8")
+    )
+
+    return {
+        "tokens": decoder.tolist(),
+        "prediction": converted_prediction,
+        "animation": "/animation",
+    }
+
+
+@app.get("/animation")
+def get_animation():
+    """Return gif animation of model's perspective"""
+    if not os.path.exists(ANIMATION_GIF):
+        return JSONResponse({"error": "No animation available"}, status_code=404)
+    return FileResponse(ANIMATION_GIF, media_type="image/gif")
