@@ -2,6 +2,7 @@ import streamlit as st
 import os
 import subprocess
 import tensorflow as tf
+print(os.getcwd())
 from utils import load_data, num_to_char
 from modelutil import load_model
 import imageio
