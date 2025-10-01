@@ -1,6 +1,6 @@
 # LipRead Project – Enhanced Version
 
-This project is an improved version of the original LipRead codebase, featuring **preprocessing optimizations**, **memory-efficient model architecture**, **advanced training callbacks**, and **GPU memory optimizations**.
+This project is an improved version of the original LipNet codebase, featuring **preprocessing optimizations**, **memory-efficient model architecture**, **advanced training callbacks**, and **GPU memory optimizations**.
 
 ---
 
