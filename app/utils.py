@@ -41,8 +41,8 @@ def load_data(path: str):
     path = bytes.decode(path.numpy())
     file_name = os.path.splitext(os.path.basename(path))[0]
 
-    video_path = os.path.join(BASE_DIR, 'data', 's1', f'{file_name}.mpg')
-    alignment_path = os.path.join(BASE_DIR, 'data', 'alignments', 's1', f'{file_name}.align')
+    video_path = os.path.join(BASE_DIR, '..', 'data', 's1', f'{file_name}.mpg')
+    alignment_path = os.path.join(BASE_DIR, '..', 'data', 'alignments', 's1', f'{file_name}.align')
     frames = load_video(video_path) 
     alignments = load_alignments(alignment_path)
     
