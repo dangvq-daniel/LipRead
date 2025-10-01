@@ -5,6 +5,7 @@ import tensorflow as tf
 from utils import load_data, num_to_char
 from modelutil import load_model
 import imageio
+import traceback
 
 # -----------------------------
 # Page configuration
@@ -88,7 +89,6 @@ if convert_predict and selected_video:
 
         # ---------- Step 2: Load video frames ----------
         video_frames, annotations = load_data(tf.convert_to_tensor(video_path))
-        st.write("working")
         progress.progress(60)
 
         # ---------- Step 3: Create AI visualization GIF ----------
@@ -118,3 +118,4 @@ if convert_predict and selected_video:
         st.error(f"Video conversion failed: {e}")
     except Exception as e:
         st.error(f"Unexpected error: {e}")
+        st.code(traceback.format_exc())  # shows full traceback in Streamlit UI
