@@ -36,8 +36,6 @@ def load_alignments(path:str) -> List[str]:
     return char_to_num(tf.reshape(tf.strings.unicode_split(tokens, input_encoding='UTF-8'), (-1)))[1:]
 
 def load_data(path: str):
-    st.write("*"*100)
-    st.write(path)
     path = bytes.decode(path.numpy())
     file_name = path.split('/')[-1].split('.')[0]
     # File name splitting for windows
