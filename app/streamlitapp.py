@@ -84,12 +84,12 @@ if convert_predict and selected_video:
         progress.progress(40)
 
         # Display original video
-        st.write("*"*100)
         video_heading_placeholder.markdown("<div style='font-size:20px; font-weight:bold; color:white;'>Original Video</div>", unsafe_allow_html=True)
         video_placeholder.video(mp4_output)
 
         # ---------- Step 2: Load video frames ----------
         st.write("*"*100)
+        st.write(video_path)
         video_frames, annotations = load_data(tf.convert_to_tensor(video_path))
         progress.progress(60)
 
