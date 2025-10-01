@@ -89,7 +89,7 @@ if convert_predict and selected_video:
         video_placeholder.video(mp4_output)
 
         # ---------- Step 2: Load video frames ----------
-        video_frames, annotations = load_data(tf.convert_to_tensor(video_path))
+        video_frames, annotations = load_data(tf.convert_to_tensor(mp4_output))
         progress.progress(60)
 
         # ---------- Step 3: Create AI visualization GIF ----------
