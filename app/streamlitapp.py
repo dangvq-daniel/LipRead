@@ -2,7 +2,6 @@ import streamlit as st
 import os
 import subprocess
 import tensorflow as tf
-print(os.getcwd())
 from utils import load_data, num_to_char
 from modelutil import load_model
 import imageio
@@ -88,8 +87,6 @@ if convert_predict and selected_video:
         video_placeholder.video(mp4_output)
 
         # ---------- Step 2: Load video frames ----------
-        st.write("*"*100)
-        st.write(video_path)
         video_frames, annotations = load_data(tf.convert_to_tensor(video_path))
         st.write("working")
         progress.progress(60)
