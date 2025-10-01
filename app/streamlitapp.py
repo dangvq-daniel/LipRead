@@ -24,7 +24,6 @@ BASE_DIR = os.getcwd()
 DATA_DIR = os.path.join(BASE_DIR, "data", "s1")
 ALIGN_DIR = os.path.join(BASE_DIR, "data", "alignments", "s1")
 OUTPUT_DIR = os.path.join(BASE_DIR, "app")
-FFMPEG_PATH = os.path.join(BASE_DIR, "ffmpeg.exe")
 
 # -----------------------------
 # Sidebar controls
@@ -74,7 +73,7 @@ if convert_predict and selected_video:
         # ---------- Step 1: Video conversion ----------
         progress.progress(10)
         subprocess.run([
-            FFMPEG_PATH,
+            "ffmpeg",
             "-y",
             "-i", video_path,
             "-vcodec", "libx264",
