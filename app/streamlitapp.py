@@ -5,7 +5,6 @@ import tensorflow as tf
 from utils import load_data, num_to_char
 from modelutil import load_model
 import imageio
-print("*"*100)
 
 # -----------------------------
 # Page configuration
