@@ -84,7 +84,7 @@ if convert_predict and selected_video:
         progress.progress(40)
 
         # Display original video
-
+        print("*"*100)
         video_heading_placeholder.markdown("<div style='font-size:20px; font-weight:bold; color:white;'>Original Video</div>", unsafe_allow_html=True)
         video_placeholder.video(mp4_output)
 
