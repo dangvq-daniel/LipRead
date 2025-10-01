@@ -79,7 +79,8 @@ if convert_predict and selected_video:
             "-vcodec", "libx264",
             "-acodec", "aac",
             mp4_output
-        ], check=True, shell=True)
+        ], check=True)  # remove shell=True
+
         progress.progress(40)
 
         # Display original video
