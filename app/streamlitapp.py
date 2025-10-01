@@ -89,6 +89,7 @@ if convert_predict and selected_video:
         video_placeholder.video(mp4_output)
 
         # ---------- Step 2: Load video frames ----------
+        print("*"*100)
         video_frames, annotations = load_data(tf.convert_to_tensor(video_path))
         progress.progress(60)
 
